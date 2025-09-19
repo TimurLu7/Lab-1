@@ -1,7 +1,6 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <windows.h>
-using namespace std;
 
 struct employee {
     int num;        
@@ -38,3 +37,4 @@ int main(int argc, char* argv[]) {
     out.close();
     return 0;
 }
+
