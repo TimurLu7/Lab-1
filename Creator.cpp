@@ -1,6 +1,7 @@
-﻿#include <iostream>
+#include <iostream>
 #include <fstream>
 #include <windows.h>
+using namespace std;
 
 struct employee {
     int num;        
@@ -15,7 +16,7 @@ int main(int argc, char* argv[]) {
     }
 
     const char* filename = argv[1];
-    int count = std::stoi(argv[2]);
+    int count = atoi(argv[2]);
 
     ofstream out(filename, ios::binary);
     if (!out) {
@@ -25,14 +26,14 @@ int main(int argc, char* argv[]) {
     employee e;
     for (int i = 0; i < count; i++) 
     {
-        cout << "Введите данные сотрудника №" << (i + 1) << endl;
-        cout << "Номер: "; 
-        cin >> emp.num;
-        cout << "Имя: ";
-        cin >> emp.name;
-        cout << "Часы: ";
-        cin >> emp.hours;
-        out.write((char*)&emp, sizeof(employee));
+        cout << "Enter details employee" << (i + 1) << endl;
+        cout << "Number: "; 
+        cin >> e.num;
+        cout << "Name: ";
+        cin >> e.name;
+        cout << "Hours: ";
+        cin >> e.hours;
+        out.write((char*)&e, sizeof(employee));
     }
     out.close();
     return 0;
