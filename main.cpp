@@ -1,4 +1,4 @@
-﻿#include <windows.h>
+#include <windows.h>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -39,7 +39,7 @@ void Print_text_file(const char* filename) {
 }
 
 int main() {
-    char bin[50], text[50];
+    char bin[100], text[100];
     int count;
     double payment;
 
@@ -48,15 +48,15 @@ int main() {
     cout << "Enter number of records: ";
     cin >> count;
 
-    char lpszAppName[]= "C:\\Users\\Timur\\proga\\ОС\\Solution\\Creator.exe";
+    string creator = "Creator.exe " + string(bin) + " " + to_string(count);
 
     STARTUPINFO si;
     PROCESS_INFORMATION piApp;
     ZeroMemory(&si, sizeof(STARTUPINFO));
     si.cb = sizeof(STARTUPINFO);
 
-    if (!CreateProcessA(NULL, lpszAppName, NULL, NULL, FALSE,
-        CREATE_NEW_CONSOLE, NULL, NULL, &si, &piApp)) {
+    if (!CreateProcessA(NULL, (LPSTR)creator.c_str(), NULL, NULL, FALSE,
+        NULL, NULL, NULL, &si, &piApp)) {
         cout << "Error opening Creator, " << GetLastError() << endl;
         return 1;
     }
@@ -72,10 +72,10 @@ int main() {
     cout << "Enter hour payment: ";
     cin >> payment;
 
-    char lpszAppName2[]="C:\\Users\\Timur\\proga\\ОС\\Solution\\Reporter.exe";
+    string reporter = "Reporter.exe " + string(bin) + " " + string(text) + " " + to_string(payment);
 
-    if (!CreateProcessA(NULL, lpszAppName2, NULL, NULL, FALSE,
-        CREATE_NEW_CONSOLE, NULL, NULL, &si, &piApp)) {
+    if (!CreateProcessA(NULL, (LPSTR)reporter.c_str(), NULL, NULL, FALSE,
+        NULL, NULL, NULL, &si, &piApp)) {
         cout << "Error starting Reporter, " << GetLastError() << endl;
         return 1;
     }
@@ -87,5 +87,8 @@ int main() {
     cout << "\nReport content:\n";
     Print_text_file(text);
 
+    cout << "\nPress Enter to exit...";
+    cin.ignore(); 
+    cin.get();    
     return 0;
 }
