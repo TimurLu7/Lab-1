@@ -28,8 +28,8 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    out << "Отчет по файлу: " << binfile << endl;
-    out << "Номер\tИмя\tЧасы\tЗарплата\n";
+   out << "File report: " << binfile << endl;
+   out << "Number\tName\tHours\tSalary\n";
 
     employee e;
     while (in.read((char*)&e, sizeof(employee))) {
@@ -42,3 +42,4 @@ int main(int argc, char* argv[]) {
     out.close();
     return 0;
 }
+
